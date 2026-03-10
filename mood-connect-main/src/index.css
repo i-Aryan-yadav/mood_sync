@@ -1,0 +1,175 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=Syne:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 240 7% 5%;
+    --foreground: 40 12% 94%;
+
+    --card: 240 7% 9%;
+    --card-foreground: 40 12% 94%;
+
+    --popover: 240 7% 9%;
+    --popover-foreground: 40 12% 94%;
+
+    --primary: 36 90% 55%;
+    --primary-foreground: 240 7% 5%;
+
+    --secondary: 249 100% 78%;
+    --secondary-foreground: 240 7% 5%;
+
+    --muted: 240 5% 14%;
+    --muted-foreground: 240 5% 54%;
+
+    --accent: 349 100% 70%;
+    --accent-foreground: 240 7% 5%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 40 12% 94%;
+
+    --border: 240 5% 16%;
+    --input: 240 5% 14%;
+    --ring: 36 90% 55%;
+
+    --radius: 0.75rem;
+
+    --surface: 240 7% 10%;
+    --surface-elevated: 240 6% 13%;
+
+    /* Mood accent colors */
+    --mood-funny: 36 90% 55%;
+    --mood-sad: 217 91% 50%;
+    --mood-study: 235 70% 65%;
+    --mood-advice: 258 90% 66%;
+    --mood-bored: 215 16% 47%;
+    --mood-flirty: 349 100% 70%;
+
+    --font-display: 'Syne', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: var(--font-body);
+  }
+}
+
+@layer components {
+  .glass {
+    background: hsl(var(--surface) / 0.6);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid hsl(0 0% 100% / 0.1);
+  }
+
+  .glass-elevated {
+    background: hsl(var(--surface-elevated) / 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid hsl(0 0% 100% / 0.08);
+  }
+
+  .glow-amber {
+    box-shadow: 0 0 30px -5px hsl(var(--primary) / 0.4);
+  }
+
+  .glow-amber-hover:hover {
+    box-shadow: 0 0 40px -5px hsl(var(--primary) / 0.6);
+  }
+}
+
+/* Floating gradient blobs */
+@keyframes blob-drift-1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(30px, -20px) scale(1.05); }
+  66% { transform: translate(-15px, 15px) scale(0.95); }
+}
+@keyframes blob-drift-2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(-25px, 20px) scale(0.95); }
+  66% { transform: translate(20px, -10px) scale(1.1); }
+}
+
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.35;
+  pointer-events: none;
+}
+.blob-amber {
+  background: hsl(var(--primary));
+  animation: blob-drift-1 12s ease-in-out infinite;
+}
+.blob-lavender {
+  background: hsl(var(--secondary));
+  animation: blob-drift-2 15s ease-in-out infinite;
+}
+.blob-rose {
+  background: hsl(var(--accent));
+  animation: blob-drift-1 18s ease-in-out infinite reverse;
+}
+
+/* Pulsing rings */
+@keyframes ring-pulse {
+  0% { transform: scale(0.8); opacity: 0.6; }
+  100% { transform: scale(2.5); opacity: 0; }
+}
+.ring-pulse {
+  animation: ring-pulse 2s ease-out infinite;
+}
+.ring-pulse-delay-1 {
+  animation: ring-pulse 2s ease-out 0.6s infinite;
+}
+.ring-pulse-delay-2 {
+  animation: ring-pulse 2s ease-out 1.2s infinite;
+}
+
+/* Typing indicator */
+@keyframes typing-bounce {
+  0%, 60%, 100% { transform: translateY(0); }
+  30% { transform: translateY(-6px); }
+}
+.typing-dot {
+  animation: typing-bounce 1.4s ease-in-out infinite;
+}
+.typing-dot:nth-child(2) { animation-delay: 0.2s; }
+.typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+/* Ghost bubble drift */
+@keyframes ghost-drift {
+  0% { opacity: 0; transform: translateY(20px) scale(0.8); }
+  30% { opacity: 0.3; }
+  70% { opacity: 0.15; }
+  100% { opacity: 0; transform: translateY(-40px) scale(1.1); }
+}
+.ghost-bubble {
+  animation: ghost-drift 4s ease-in-out infinite;
+}
+
+/* Stats pulse */
+@keyframes stat-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+.stat-pulse {
+  animation: stat-pulse 3s ease-in-out infinite;
+}
+
+/* Number pulse */
+@keyframes num-glow {
+  0%, 100% { text-shadow: none; }
+  50% { text-shadow: 0 0 8px currentColor; }
+}
+.num-glow {
+  animation: num-glow 4s ease-in-out infinite;
+}
